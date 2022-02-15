@@ -48,5 +48,6 @@ shadowJar {
     filesMatching('plugin.yml') {
         filter { it.replaceAll('@@RELEASE_VERSION@@', releaseVersion) }
     }
+
 }
 build.dependsOn(shadowJar)

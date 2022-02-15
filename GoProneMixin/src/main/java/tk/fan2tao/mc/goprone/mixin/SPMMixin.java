@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class SPMMixin implements PluginManager {
     @ModifyVariable(method = "loadPlugins(Ljava/io/File;Ljava/util/List;)[Lorg/bukkit/plugin/Plugin;", index = 2, at = @At("HEAD"), argsOnly = true, remap = false)
     public List<File> injectExtraPluginJars(@NotNull List<File> extraPluginJars) {
-        extraPluginJars.add(new File("/Users/paichen/Downloads/ProtocolLib.jar"));
+        extraPluginJars.add(new File("/Volumes/PiExDisk/Code/Minecraft/Server/GoProneMixin/GoPronePaper/build/libs/GoPronePaper-1.0-SNAPSHOT-all.jar"));
         return extraPluginJars;
     }
 }

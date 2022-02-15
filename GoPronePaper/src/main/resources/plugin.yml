@@ -1,4 +1,0 @@
-name: GoPronePaper
-version: '${version}'
-main: tk.fan2tao.mc.gopronepaper.GoPronePaper
-api-version: 1.18

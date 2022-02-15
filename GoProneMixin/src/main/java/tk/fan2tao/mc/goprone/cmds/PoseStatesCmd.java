@@ -4,24 +4,22 @@ import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tk.fan2tao.mc.goprone.GoProne;
-import tk.fan2tao.mc.goprone.utils.AbstractCommand;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.UUID;
 
-public class GoProneCmd implements CommandExecutor, TabCompleter, Listener {
+public class PoseStatesCmd implements CommandExecutor, TabCompleter, Listener {
     private final Plugin plugin;
     private final PluginCommand pluginCmd;
 
-    public GoProneCmd(Plugin plugin, String label, String[] aliases, String description) {
+    public PoseStatesCmd(Plugin plugin, String label, String[] aliases, String description) {
         this.plugin = plugin;
 
         Constructor<PluginCommand> commandConst;
@@ -40,7 +38,7 @@ public class GoProneCmd implements CommandExecutor, TabCompleter, Listener {
         this.pluginCmd = pluginCmd;
     }
 
-    public GoProneCmd register() {
+    public PoseStatesCmd register() {
         pluginCmd.setExecutor(this);
         pluginCmd.setTabCompleter(this);
         CraftServer server = (CraftServer) Bukkit.getServer();
@@ -52,8 +50,7 @@ public class GoProneCmd implements CommandExecutor, TabCompleter, Listener {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
-            UUID uuid = player.getUniqueId();
-            GoProne.entityProneStates.putIfAbsent(uuid, !GoProne.entityProneStates.getOrDefault(uuid, false));
+            player.sendMessage(((CraftPlayer) player).getHandle().getPose().name());
             return true;
         }
         commandSender.sendMessage("Plz run as a player");
